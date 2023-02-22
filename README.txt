@@ -1,0 +1,1 @@
+https://masstransit-project.com/quick-starts/in-memory.html
