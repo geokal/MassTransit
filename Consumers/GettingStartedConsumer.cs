@@ -17,7 +17,7 @@ namespace Company.Consumers
 
         public Task Consume(ConsumeContext<HelloMessage> context)
         {
-            _logger.LogInformation("Received Text: {Text}", context.Message.Value);
+            _logger.LogInformation("Hello {Name}", context.Message.Name);
             return Task.CompletedTask;
         }
     }

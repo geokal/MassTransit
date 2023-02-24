@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Company.Consumers;
 using Microsoft.Extensions.Hosting;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,8 +32,14 @@ namespace MassTransit
                         x.AddSagas(entryAssembly);
                         x.AddActivities(entryAssembly);
 
-                        x.UsingInMemory((context, cfg) =>
+                        x.UsingRabbitMq((context, cfg) =>
                         {
+                            cfg.Host("localhost", "/", h =>
+                            {
+                                h.Username("guest");
+                                h.Password("guest");
+                            });
+
                             cfg.ConfigureEndpoints(context);
                         });
                     });
